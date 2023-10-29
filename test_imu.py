@@ -16,8 +16,9 @@ i2c = I2C(1, sda=Pin(26), scl=Pin(27), freq=400000)
 imu = MPU6050(i2c)
 
 def calculate(xacel, yacel):
-    AccXangle = (float) (atan2(*(xacel+1),*(xacel+2))+pi) * RAD_To_DEG
-    AccYangle = (float) (atan2(*(yacel+2),*yacel)+pi) * RAD_To_DEG
+    AccXangle = (atan2((xacel+1),(xacel+2))+pi) * RAD_To_DEG
+
+    AccYangle = (atan2((yacel+2),yacel)+pi) * RAD_To_DEG
 
     return AccXangle, AccYangle
 
@@ -32,8 +33,8 @@ while True:
     gz=round(imu.gyro.z)
     tem=round(imu.temperature,2)
 
-    calculate(imu.accel.x, imu.accel.y)
-
+    # calculate(imu.accel.x, imu.accel.y)
+    print(calculate(imu.accel.x, imu.accel.y))
 
     
 

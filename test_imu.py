@@ -12,9 +12,9 @@ i2c_1 = I2C(id=1, sda=Pin(26), scl=Pin(27))
 mpu = MPU6050()
 
 while True:
-    print(mpu.get_gyro_raw)
+    print(mpu.get_gyro_raw())
     sleep(0.1)
-
+    print('am ajuns aici')
 
 
 

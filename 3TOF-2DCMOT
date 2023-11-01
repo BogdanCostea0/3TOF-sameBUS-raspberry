@@ -117,10 +117,16 @@ tofl2.set_address(0x33)
 # active loop 
 while START.value() == 0:
     a = 0
+has_stopped = False
 
 while True:
     while(START.value() == 1):
-        m_speed(REAL_SPEED, 1)
+        if tofl0.ping() > 100: # type: ignore
+            m_speed(REAL_SPEED, 1) 
+        elif tofl0.ping() <100: # type: ignore
+            m_speed(REAL_SPEED, -1)
+            sleep(0.01)
+            m_speed(REAL_SPEED, 0)
         print("Distance 1: ", tofl0.ping(), "mm", "Distance 2: ", tofl1.ping(), "mm", "Distance 3: ", tofl2.ping(), "mm")
 
     while(START.value() == 0):
